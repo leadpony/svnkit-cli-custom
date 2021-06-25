@@ -1,5 +1,5 @@
-﻿$commandDir = $MyInvocation.MyCommand.Path
-$scriptDir = Split-Path $commandDir -Parent
+﻿$scriptPath = $MyInvocation.MyCommand.Path
+$scriptDir = Split-Path $scriptPath -Parent
 $baseDir = Split-Path $scriptDir -Parent
 
 $javacmd = $env:JAVACMD
