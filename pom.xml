@@ -4,7 +4,7 @@
 
     <groupId>org.tmatesoft.svnkit</groupId>
     <artifactId>svnkit-distribution</artifactId>
-    <version>1.10.3-2-SNAPSHOT</version>
+    <version>1.10.3-2</version>
 
     <packaging>pom</packaging>
 

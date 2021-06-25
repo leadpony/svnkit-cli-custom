@@ -2,11 +2,11 @@
 $scriptDir = Split-Path $scriptPath -Parent
 $baseDir = Split-Path $scriptDir -Parent
 
-$javacmd = $env:JAVACMD
-if ($null -eq $javacmd) {
-    $javacmd = "java"
+$java = $env:JAVACMD
+if ($null -eq $java) {
+    $java = "java"
     if ($null -ne $env:JAVA_HOME) {
-        $javacmd = "$env:JAVA_HOME\bin\java"
+        $java = "$env:JAVA_HOME\bin\java"
     }
 }
 
@@ -16,10 +16,15 @@ if ($null -eq $libDir) {
 }
 
 $classpath = "$libDir\*"
-$jvmargs=@(
+
+$javaArgs=@(
     "-Djava.util.logging.config.file=$baseDir\conf\logging.properties",
-    "-Dsun.io.useCanonCaches=false")
+    "-Dsun.io.useCanonCaches=false",
+    '-classpath',
+    $classpath,
+    'org.tmatesoft.svn.cli.SVN'
+    ) + $args
 
-$allargs = $jvmargs + @('-classpath', $classpath, 'org.tmatesoft.svn.cli.SVN') + $Args
+$javaArgs = $javaArgs | ForEach-Object { """$_""" } 
 
-Start-Process -FilePath $javacmd -ArgumentList $allargs -Wait -NoNewWindow
+Start-Process -Wait -NoNewWindow -FilePath $java -ArgumentList $javaArgs 
