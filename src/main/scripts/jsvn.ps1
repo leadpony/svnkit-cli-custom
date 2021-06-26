@@ -37,14 +37,8 @@ $javaArgs=@(
 
 $javaArgs = $javaArgs | ForEach-Object { """$_""" } 
 
-$Host.UI.RawUI.FlushInputBuffer()
-
-try {
-    if ($usePager) {
-        & $java $javaArgs | Out-Host -Paging
-    } else {
-        & $java $javaArgs
-    }
-} catch [System.Management.Automation.HaltCommandException] {
-    Write-Host $_
+if ($usePager) {
+    & $java $javaArgs | more
+} else {
+    & $java $javaArgs
 }

@@ -4,7 +4,7 @@
 
     <groupId>org.leadpony.svnkit</groupId>
     <artifactId>svnkit-cli</artifactId>
-    <version>1.10.3-3</version>
+    <version>1.10.3-4</version>
 
     <packaging>pom</packaging>
 
