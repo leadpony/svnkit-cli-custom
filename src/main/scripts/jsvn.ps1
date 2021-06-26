@@ -2,6 +2,16 @@
 $scriptDir = Split-Path $scriptPath -Parent
 $baseDir = Split-Path $scriptDir -Parent
 
+$cmd = $null
+foreach ($arg in $args) {
+    if (-not $arg.StartsWith('-')) {
+        $cmd = $arg
+        break
+    }    
+}
+
+$usePager = @('blame', 'diff', 'log').Contains($cmd)
+
 $java = $env:JAVACMD
 if ($null -eq $java) {
     $java = "java"
@@ -27,4 +37,14 @@ $javaArgs=@(
 
 $javaArgs = $javaArgs | ForEach-Object { """$_""" } 
 
-Start-Process -Wait -NoNewWindow -FilePath $java -ArgumentList $javaArgs 
+$Host.UI.RawUI.FlushInputBuffer()
+
+try {
+    if ($usePager) {
+        & $java $javaArgs | Out-Host -Paging
+    } else {
+        & $java $javaArgs
+    }
+} catch [System.Management.Automation.HaltCommandException] {
+    Write-Host $_
+}

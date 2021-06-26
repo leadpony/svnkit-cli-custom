@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.tmatesoft.svnkit</groupId>
-    <artifactId>svnkit-distribution</artifactId>
-    <version>1.10.3-2</version>
+    <groupId>org.leadpony.svnkit</groupId>
+    <artifactId>svnkit-cli</artifactId>
+    <version>1.10.3-3</version>
 
     <packaging>pom</packaging>
 
@@ -52,7 +52,7 @@
                             <goal>single</goal>
                         </goals>
                         <configuration>
-                            <finalName>svnkit-cli-${project.version}</finalName>
+                            <finalName>${project.artifactId}-${project.version}</finalName>
                             <attach>false</attach>
                             <appendAssemblyId>false</appendAssemblyId>
                             <descriptors>
